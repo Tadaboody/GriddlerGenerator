@@ -32,7 +32,7 @@ def griddler_list(image):
                 result[i][-1] += 1
             else:
                 segment = False
-
+    print result
     return result
 
 
@@ -40,6 +40,7 @@ def resize_maintaining_ratio(image, new_height):
     ratio = float(new_height) / float(len(image))
     new_width = int(len(image[0]) * ratio)
     return cv2.resize(image, (new_width, new_height))
+
 
 def main():
     image_name = "awoo"
@@ -60,11 +61,12 @@ def main():
     pyplot.subplot(142)
     pyplot.title("Threshold:{}".format(threshold))
     pyplot.imshow(image, "gray")
-    height, width = (30, 50)
+    height, width = (30, 30)
     imagea = resize_maintaining_ratio(image, height)
     # print image
-    pyplot.subplot(143), pyplot.title("Trunc with ratio:{} by {}".format(height, len(imagea[0]))), pyplot.imshow(imagea, "gray")
-    imageb = cv2.resize(image,(width,height))
+    pyplot.subplot(143), pyplot.title("Trunc with ratio:{} by {}".format(height, len(imagea[0]))), pyplot.imshow(imagea,
+                                                                                                                 "gray")
+    imageb = cv2.resize(image, (width, height))
     pyplot.subplot(144), pyplot.title("Trunc:{} by {}".format(height, width)), pyplot.imshow(imageb, "gray")
     # def jpeg_trunc(size):
     #     while True:
@@ -72,5 +74,17 @@ def main():
     print griddler_count(imagea)
     print griddler_count(imagea)[1]
     pyplot.show()
+
+
 if __name__ == "__main__":
     main()
+
+
+def blur_by(image, value, core=2):
+    if int(value):
+        filter0 = [1] * int(value)
+        filter0[int(value) / 2] = core
+        ker = normalize_array([filter0 for i in range(len(filter0))])
+        kernel = np.array(ker)
+        image = cv2.filter2D(image, -1, kernel)
+    return image
