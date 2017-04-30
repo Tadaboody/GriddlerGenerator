@@ -50,7 +50,7 @@ class Merger(GridLayout):
     def update(self):
         ret, ima = cv2.threshold(self.image_array, self.thresh_slider.value, 255, cv2.THRESH_BINARY)
         ima = griddler.resize_maintaining_ratio(ima, int(self.size_slider.value))
-        # ima = griddler.blur_by(ima, self.blur_slider.value)
+        ima = griddler.blur_by(ima, self.blur_slider.value)
         self.final_image_array = ima
         cv2.imwrite("pics/bin.png", ima)
         self.image.reload()
