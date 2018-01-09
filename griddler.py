@@ -20,11 +20,11 @@ def griddler_count(image):
 
 def griddler_list(image):
     image_size = len(image)
-    result = [[] for x in xrange(image_size)]
+    result = [[] for x in range(image_size)]
     segment = False
-    for i in xrange(image_size):
+    for i in range(image_size):
         segment = False
-        for j in xrange(len(image[0])):
+        for j in range(len(image[0])):
             if not image[i][j]:
                 if not segment:
                     result[i].append(0)
@@ -32,7 +32,7 @@ def griddler_list(image):
                 result[i][-1] += 1
             else:
                 segment = False
-    print result
+    print(result)
     return result
 
 
@@ -50,20 +50,20 @@ def main():
     pyplot.imshow(image, "gray")
     pyplot.title(image_name)
 
-    print image
+    print(image)
     threshold = 180
     ret, image = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY)
     filter0 = [1] * 2
     ker = [filter0 for i in range(len(filter0))]
     kernel = np.array(ker)
     image = cv2.filter2D(image, -1, kernel)
-    print image
+    print(image)
     pyplot.subplot(142)
     pyplot.title("Threshold:{}".format(threshold))
     pyplot.imshow(image, "gray")
     height, width = (30, 30)
     imagea = resize_maintaining_ratio(image, height)
-    # print image
+    # print(image)
     pyplot.subplot(143), pyplot.title("Trunc with ratio:{} by {}".format(height, len(imagea[0]))), pyplot.imshow(imagea,
                                                                                                                  "gray")
     imageb = cv2.resize(image, (width, height))
@@ -71,8 +71,8 @@ def main():
     # def jpeg_trunc(size):
     #     while True:
     #         try:
-    print griddler_count(imagea)
-    print griddler_count(imagea)[1]
+    print(griddler_count(imagea))
+    print(griddler_count(imagea)[1])
     pyplot.show()
 
 
@@ -83,7 +83,7 @@ if __name__ == "__main__":
 def blur_by(image, value, core=2):
     if int(value):
         filter0 = [1] * int(value)
-        filter0[int(value) / 2] = core
+        filter0[int(value) // 2] = core
         ker = normalize_array([filter0 for i in range(len(filter0))])
         kernel = np.array(ker)
         image = cv2.filter2D(image, -1, kernel)

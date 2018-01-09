@@ -54,8 +54,8 @@ class Merger(GridLayout):
         self.final_image_array = ima
         cv2.imwrite("pics/bin.png", ima)
         self.image.reload()
-        print int(self.thresh_slider.value)
-        print int(self.size_slider.value)
+        print((int(self.thresh_slider.value)))
+        print(int(self.size_slider.value))
 
     def previous_screen(self):
         self.parent.current = "files"
@@ -120,7 +120,7 @@ class GriddlerGame(GridLayout):
             self.add_widget(NumStack(i, color_changer, orientation="vertical"))
         for j in gridx:
             self.add_widget(NumStack(j, color_changer, orientation="horizontal"))
-            for i in xrange(len(gridy)):
+            for i in range(len(gridy)):
                 self.add_widget(GriddlerButton(color_changer))
 
 
@@ -131,7 +131,7 @@ class GameScreen(NavigationScreen):
 
 class OptionScreen(NavigationScreen):
     def on_pre_enter(self, *args):
-        print self.parent.image
+        print(self.parent.image)
         self.add_widget(Merger(self.manager.image))
 
     def next_screen(self):

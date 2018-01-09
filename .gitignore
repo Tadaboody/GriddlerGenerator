@@ -1,2 +1,4 @@
 /virtenv
 /.vscode
+/__pycache__
+/pics/bin.png
